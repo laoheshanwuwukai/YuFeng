@@ -11,10 +11,6 @@ if(PROJECT_BINARY_DIR STREQUAL PROJECT_SOURCE_DIR)
     "In-Source build is not allowed , Please make a new directory(called a build directory) and run CMake from there")
 endif()
 
-set(CMAKE_EXPORT_COMPILE_COMMANDS on)
-set(CMAKE_CXX_STANDARD 17)
-
-# About project cmake var
 message(STATUS "project name ${PROJECT_NAME}")
 message(STATUS "project version major ${PROJECT_VERSION_MAJOR}")
 message(STATUS "project version minor ${PROJECT_VERSION_MINOR}")
@@ -25,9 +21,18 @@ message(STATUS "project binary dir ${PROJECT_BINARY_DIR}")
 if(CMAKE_INSTALL_PREFIX_INITIALIZED_TO_DEFAULT)
   set(CMAKE_INSTALL_PREFIX
     ${CMAKE_SOURCE_DIR}/install
-    CACHE PATH "TODO default install directory" FORCE)
+    CACHE PATH "Default install directory" FORCE)
 endif()
 
-message(STATUS "cmake install prefix : ${CMAKE_INSTALL_PREFIX}")
+if(NOT CMAKE_BUILD_TYPE)
+  set(CMAKE_BUILD_TYPE RelWithDebInfo)
+endif()
 
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+set(CMAKE_CXX_STANDARD 17)
+
+set(FirstPrefix "/opt/first")
+set(SecondPrefix "/opt/second")
+list(APPEND CMAKE_PREFIX_PATH ${FirstPrefix} ${SecondPrefix})
+message(STATUS "Cmake prefix path-> ${CMAKE_PREFIX_PATH}")
 
