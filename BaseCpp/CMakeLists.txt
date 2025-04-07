@@ -31,8 +31,14 @@ endif()
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 set(CMAKE_CXX_STANDARD 17)
 
-set(FirstPrefix "/opt/first")
-set(SecondPrefix "/opt/second")
-list(APPEND CMAKE_PREFIX_PATH ${FirstPrefix} ${SecondPrefix})
-message(STATUS "Cmake prefix path-> ${CMAKE_PREFIX_PATH}")
+
+file(GLOB_RECURSE SOURCES "*.cc")
+message(STATUS ${SOURCES})
+list(FILTER SOURCES EXCLUDE REGEX
+     ".*/test/.*|.*_test.cc|tools/.*|.*example.*|python/.*|mainboard/.*")
+add_library(${PROJECT_NAME} SHARED ${SOURCES} )
+
+target_link_libraries(
+  ${PROJECT_NAME}
+  PUBLIC)
 
