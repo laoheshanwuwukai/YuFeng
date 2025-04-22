@@ -20,7 +20,10 @@ void print_vector(const vector<int> &vec) {
   cout << endl;
 }
 
-int main() {
+int main(int argc, char **argv) {
+  for (int i = 0; i < argc; i++) {
+    std::cout << "argv" << i << " " << argv[i] << std::endl;
+  }
   int x = 5;
   int y = 0;
 
