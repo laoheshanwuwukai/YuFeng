@@ -4,3 +4,4 @@ install
 **/*__pycache__
 ML/Chapter05/trec06c-utf8/*
 ML/Chapter06/data/*
+ML/Chapter08/data/*
